@@ -17,7 +17,7 @@ interface TicketAttr {
   ticket_type: number;
 }
 
-@Table({ tableName: 'builder' })
+@Table({ tableName: 'ticket' })
 export class Ticket extends Model<Ticket, TicketAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({

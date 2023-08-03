@@ -5,8 +5,10 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { Booking } from '../../booking/models/booking.model';
 
 interface CartAttr {
   ticket_id: number;
@@ -55,4 +57,7 @@ export class Cart extends Model<Cart, CartAttr> {
     type: DataType.INTEGER,
   })
   status_id: number;
+
+  @HasMany(() => Booking)
+  booking: Booking[];
 }

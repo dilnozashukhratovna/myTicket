@@ -1,6 +1,8 @@
-export class UpdateBuilderDto {
-  full_name?: string;
-  birth_day?: Date;
-  salary?: number;
-  companyId?: number;
+export class UpdateSeatDto {
+  sector?: number;
+  row_number?: number;
+  number?: number;
+  venue_id?: number;
+  seat_type_id?: number;
+  location_in_schema?: string;
 }

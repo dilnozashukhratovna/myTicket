@@ -6,18 +6,19 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface SeatAttr {
+  sector: number;
+  row_number: number;
+  number: number;
+  venue_id: number;
+  seat_type_id: number;
+  location_in_schema: string;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'seat' })
+export class Seat extends Model<Seat, SeatAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +27,39 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  full_name: string;
-
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
-  @Column({
-    type: DataType.DATE,
-  })
-  birth_day: Date;
-
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  @Column({
-    type: DataType.DECIMAL,
-  })
-  salary: number;
-
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
+  @ApiProperty({ example: 1, description: 'Sector' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
+  sector: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  @ApiProperty({ example: 1, description: 'Row number' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  row_number: number;
+
+  @ApiProperty({ example: 1, description: 'Number' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  number: number;
+
+  @ApiProperty({ example: 1, description: 'Venue id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  venue_id: number;
+
+  @ApiProperty({ example: 1, description: 'Seat type id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  seat_type_id: number;
+
+  @ApiProperty({ example: 'Location', description: 'Location in schema' })
+  @Column({
+    type: DataType.STRING,
+  })
+  location_in_schema: string;
 }

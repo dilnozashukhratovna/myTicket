@@ -1,6 +1,4 @@
-export class UpdateBuilderDto {
-  full_name?: string;
-  birth_day?: Date;
-  salary?: number;
-  companyId?: number;
+export class UpdateVenue_photoDto {
+  venue_id?: number;
+  url?: string;
 }

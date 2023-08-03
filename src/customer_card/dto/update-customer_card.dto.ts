@@ -1,6 +1,10 @@
-export class UpdateBuilderDto {
-  full_name?: string;
-  birth_day?: Date;
-  salary?: number;
-  companyId?: number;
+export class UpdateCustomer_cardDto {
+  customer_id?: number;
+  name?: string;
+  phone?: string;
+  number?: string;
+  year?: string;
+  month?: string;
+  is_active?: boolean;
+  is_main?: boolean;
 }

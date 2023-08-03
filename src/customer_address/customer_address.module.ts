@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BuilderController } from './builder.controller';
-import { BuilderService } from './builder.service';
+import { Customer_addressController } from './customer_address.controller';
+import { Customer_addressService } from './customer_address.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Builder } from './models/builder.model';
+import { Customer_address } from './models/customer_address.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Builder])],
-  controllers: [BuilderController],
-  providers: [BuilderService],
+  imports: [SequelizeModule.forFeature([Customer_address])],
+  controllers: [Customer_addressController],
+  providers: [Customer_addressService],
 })
-export class BuilderModule {}
+export class Customer_addressModule {}

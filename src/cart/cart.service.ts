@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/cart.model';
+import { Cart } from './models/cart.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-cart.dto';
-import { UpdateBuilderDto } from './dto/update-cart.dto';
+import { CreateCartDto } from './dto/create-cart.dto';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class CartService {
+  constructor(@InjectModel(Cart) private cartRepo: typeof Cart) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createCart(createCartDto: CreateCartDto): Promise<Cart> {
+    const cart = await this.cartRepo.create(createCartDto);
+    return cart;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllCart(): Promise<Cart[]> {
+    const carts = await this.cartRepo.findAll({ include: { all: true } });
+    return carts;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getCartById(id: number): Promise<Cart> {
+    const cart = await this.cartRepo.findByPk(id);
+    return cart;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteCartById(id: number) {
+    const cart = await this.cartRepo.destroy({ where: { id } });
+    return cart;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateCart(id: number, updateCartDto: UpdateCartDto) {
+    const cart = await this.cartRepo.update(updateCartDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return cart[1][0].dataValues;
   }
 }

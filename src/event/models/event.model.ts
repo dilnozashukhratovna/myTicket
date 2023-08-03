@@ -6,18 +6,25 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface EventAttr {
+  name: string;
+  photo: string;
+  start_date: Date;
+  start_time: string;
+  finish_date: Date;
+  finish_time: string;
+  info: string;
+  event_type_id: number;
+  human_category_id: number;
+  venue_id: number;
+  lang_id: number;
+  release_date: Date;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'event' })
+export class Event extends Model<Event, EventAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +33,75 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
+  @ApiProperty({ example: 'Event name', description: 'Event name' })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
   })
-  full_name: string;
+  name: string;
 
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
+  @ApiProperty({ example: 'photo', description: 'Event photo' })
+  @Column({
+    type: DataType.STRING,
+  })
+  photo: string;
+
+  @ApiProperty({ example: '2023-01-01', description: 'Event start date' })
   @Column({
     type: DataType.DATE,
   })
-  birth_day: Date;
+  start_date: Date;
 
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
+  @ApiProperty({ example: '6pm', description: 'Event start time' })
   @Column({
-    type: DataType.DECIMAL,
+    type: DataType.STRING,
   })
-  salary: number;
+  start_time: string;
 
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
+  @ApiProperty({ example: '2023-01-01', description: 'Event finish date' })
+  @Column({
+    type: DataType.STRING,
+  })
+  finish_date: Date;
+
+  @ApiProperty({ example: '8pm', description: 'Event finish time' })
+  @Column({
+    type: DataType.STRING,
+  })
+  finish_time: string;
+
+  @ApiProperty({ example: 'Text', description: 'Event info' })
+  @Column({
+    type: DataType.STRING,
+  })
+  info: string;
+
+  @ApiProperty({ example: 1, description: 'Event type id' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
+  event_type_id: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  @ApiProperty({ example: 1, description: 'Human Category id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  human_category_id: number;
+
+  @ApiProperty({ example: 1, description: 'Event vanue id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  venue_id: number;
+
+  @ApiProperty({ example: 1, description: 'Event language id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  lang_id: number;
+
+  @ApiProperty({ example: '2023-01-01', description: 'Event release date' })
+  @Column({
+    type: DataType.DATE,
+  })
+  release_date: Date;
 }

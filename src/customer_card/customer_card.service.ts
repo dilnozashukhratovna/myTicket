@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/builder.model';
+import { Customer_card } from './models/customer_card.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { CreateCustomer_cardDto } from './dto/create-customer_card.dto';
+import { UpdateCustomer_cardDto } from './dto/update-customer_card.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class Customer_cardService {
+  constructor(@InjectModel(Customer_card) private customer_cardRepo: typeof Customer_card) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createCustomer_card(createCustomer_cardDto: CreateCustomer_cardDto): Promise<Customer_card> {
+    const customer_card = await this.customer_cardRepo.create(createCustomer_cardDto);
+    return customer_card;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllCustomer_card(): Promise<Customer_card[]> {
+    const customer_cards = await this.customer_cardRepo.findAll({ include: { all: true } });
+    return customer_cards;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getCustomer_cardById(id: number): Promise<Customer_card> {
+    const customer_card = await this.customer_cardRepo.findByPk(id);
+    return customer_card;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteCustomer_cardById(id: number) {
+    const customer_card = await this.customer_cardRepo.destroy({ where: { id } });
+    return customer_card;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateCustomer_card(id: number, updateCustomer_cardDto: UpdateCustomer_cardDto) {
+    const customer_card = await this.customer_cardRepo.update(updateCustomer_cardDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return customer_card[1][0].dataValues;
   }
 }

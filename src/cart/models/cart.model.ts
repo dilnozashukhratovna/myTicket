@@ -8,15 +8,16 @@ import {
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface CartAttr {
+  ticket_id: number;
+  customer_id: number;
+  createdAt: Date;
+  fineshedAt: Date;
+  status_id: number;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'cart' })
+export class Cart extends Model<Cart, CartAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -25,34 +26,33 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
+  @ApiProperty({ example: 1, description: 'Ticket id' })
   @Column({
-    type: DataType.STRING,
-    allowNull: false,
+    type: DataType.INTEGER,
   })
-  full_name: string;
+  ticket_id: number;
 
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
+  @ApiProperty({ example: 1, description: 'Customer id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  customer_id: number;
+
+  @ApiProperty({ example: 1, description: 'Creating date' })
   @Column({
     type: DataType.DATE,
   })
-  birth_day: Date;
+  createdAt: Date;
 
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
+  @ApiProperty({ example: 1, description: 'Finishing date' })
   @Column({
-    type: DataType.DECIMAL,
+    type: DataType.DATE,
   })
-  salary: number;
+  fineshedAt: Date;
 
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
+  @ApiProperty({ example: 1, description: 'Ticket id' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
-
-  @BelongsTo(() => Company)
-  company: Company;
+  status_id: number;
 }

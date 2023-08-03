@@ -6,18 +6,21 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface Customer_cardAttr {
+  customer_id: number;
+  name: string;
+  phone: string;
+  number: string;
+  year: string;
+  month: string;
+  is_active: boolean;
+  is_main: boolean;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'customer_card' })
+export class Customer_card extends Model<Customer_card, Customer_cardAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +29,75 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
+  @ApiProperty({
+    example: 1,
+    description: 'Customer id',
   })
-  full_name: string;
-
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
-  @Column({
-    type: DataType.DATE,
-  })
-  birth_day: Date;
-
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  @Column({
-    type: DataType.DECIMAL,
-  })
-  salary: number;
-
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
+  customer_id: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  @ApiProperty({
+    example: 'Card name',
+    description: 'Customer card name',
+  })
+  @Column({
+    type: DataType.STRING,
+  })
+  name: string;
+
+  @ApiProperty({
+    example: '+998998887766',
+    description: 'Customer phone number that was used for opening card',
+  })
+  @Column({
+    type: DataType.STRING,
+  })
+  phone: string;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Number',
+  })
+  @Column({
+    type: DataType.STRING,
+  })
+  number: string;
+
+  @ApiProperty({
+    example: 'Card year',
+    description: 'Customer card year',
+  })
+  @Column({
+    type: DataType.STRING,
+  })
+  year: string;
+
+  @ApiProperty({
+    example: 'Card month',
+    description: 'Customer card month',
+  })
+  @Column({
+    type: DataType.STRING,
+  })
+  month: string;
+
+  @ApiProperty({
+    example: 'false',
+    description: 'Whether customer active or not',
+  })
+  @Column({
+    type: DataType.BOOLEAN,
+  })
+  is_active: boolean;
+
+  @ApiProperty({
+    example: 'false',
+    description: 'Whether customer main or not',
+  })
+  @Column({
+    type: DataType.BOOLEAN,
+  })
+  is_main: boolean;
 }

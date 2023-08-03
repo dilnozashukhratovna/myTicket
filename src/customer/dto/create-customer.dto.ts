@@ -1,12 +1,36 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty, IsPhoneNumber, IsEmail, IsStrongPassword } from 'class-validator';
 
-export class CreateBuilderDto {
-  @ApiProperty({ example: 'John Green', description: 'Builder full name' })
-  full_name: string;
-  @ApiProperty({ example: '2001-01-01', description: 'Builder birth date' })
-  birth_day: Date;
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  salary: number;
-  @ApiProperty({ example: 1, description: 'Builder company id' })
-  companyId: number;
+export class CreateCustomerDto {
+  @ApiProperty({ example: 'John', description: 'Customer first name' })
+  @IsString()
+  first_name: string;
+
+  @ApiProperty({ example: 'Green', description: 'Customer last name' })
+  @IsString()
+  last_name: string;
+
+  @ApiProperty({
+    example: '+998997778800',
+    description: 'Customer phone number',
+  })
+  @IsPhoneNumber()
+  phone: string;
+
+  @ApiProperty({ example: 'john@gmail.com', description: 'Customer email' })
+  @IsEmail()
+  email: string;
+
+  @ApiProperty({ example: 'Pa$$w0rd', description: 'Customer password' })
+  @IsStrongPassword()
+  password: string;
+
+  @ApiProperty({ example: '2002-01-01', description: 'Customer birth date' })
+  birth_date: Date;
+
+  @ApiProperty({ example: 0, description: 'Customer gender' })
+  gender: number;
+
+  @ApiProperty({ example: 1, description: 'Language id' })
+  lang_id: number;
 }

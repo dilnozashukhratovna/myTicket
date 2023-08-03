@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './builder.service';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { Customer_cardService } from './customer_card.service';
+import { CreateCustomer_cardDto } from './dto/create-customer_card.dto';
+import { UpdateCustomer_cardDto } from './dto/update-customer_card.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Customer_card')
+@Controller('customer_card')
+export class Customer_cardController {
+  constructor(private readonly customer_cardService: Customer_cardService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Customer_card  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createCustomer_card(@Body() createCustomer_cardDto: CreateCustomer_cardDto) {
+    const customer_card = this.customer_cardService.createCustomer_card(createCustomer_cardDto);
+    return customer_card;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Customer_card'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllCustomer_card() {
+    return this.customer_cardService.getAllCustomer_card();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Customer_card'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getCustomer_cardById(@Param('id') id: string) {
+    return this.customer_cardService.getCustomer_cardById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Customer_card'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteCustomer_cardById(@Param('id') id: string) {
+    return this.customer_cardService.deleteCustomer_cardById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Customer_card'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateCustomer_card(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateCustomer_cardDto: UpdateCustomer_cardDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.customer_cardService.updateCustomer_card(+id, updateCustomer_cardDto);
   }
 }

@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './builder.service';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { Event_typeService } from './event_type.service';
+import { CreateEvent_typeDto } from './dto/create-event_type.dto';
+import { UpdateEvent_typeDto } from './dto/update-event_type.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Event_type')
+@Controller('event_type')
+export class Event_typeController {
+  constructor(private readonly event_typeService: Event_typeService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Event_type  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createEvent_type(@Body() createEvent_typeDto: CreateEvent_typeDto) {
+    const event_type = this.event_typeService.createEvent_type(createEvent_typeDto);
+    return event_type;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Event_type'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllEvent_type() {
+    return this.event_typeService.getAllEvent_type();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Event_type'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getEvent_typeById(@Param('id') id: string) {
+    return this.event_typeService.getEvent_typeById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Event_type'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteEvent_typeById(@Param('id') id: string) {
+    return this.event_typeService.deleteEvent_typeById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Event_type'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateEvent_type(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateEvent_typeDto: UpdateEvent_typeDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.event_typeService.updateEvent_type(+id, updateEvent_typeDto);
   }
 }

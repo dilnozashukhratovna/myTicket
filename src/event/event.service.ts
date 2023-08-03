@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/builder.model';
+import { Event } from './models/event.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { CreateEventDto } from './dto/create-event.dto';
+import { UpdateEventDto } from './dto/update-event.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class EventService {
+  constructor(@InjectModel(Event) private eventRepo: typeof Event) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createEvent(createEventDto: CreateEventDto): Promise<Event> {
+    const event = await this.eventRepo.create(createEventDto);
+    return event;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllEvent(): Promise<Event[]> {
+    const events = await this.eventRepo.findAll({ include: { all: true } });
+    return events;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getEventById(id: number): Promise<Event> {
+    const event = await this.eventRepo.findByPk(id);
+    return event;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteEventById(id: number) {
+    const event = await this.eventRepo.destroy({ where: { id } });
+    return event;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateEvent(id: number, updateEventDto: UpdateEventDto) {
+    const event = await this.eventRepo.update(updateEventDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return event[1][0].dataValues;
   }
 }

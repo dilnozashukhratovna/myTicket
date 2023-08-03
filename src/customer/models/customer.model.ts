@@ -6,18 +6,22 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface CustomerAttr {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  password: string;
+  birth_date: Date;
+  gender: number;
+  lang_id: number;
+  hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'customer' })
+export class Customer extends Model<Customer, CustomerAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +30,64 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
+  @ApiProperty({ example: 'John', description: 'Customer first name' })
+  @Column({
+    type: DataType.STRING,
+  })
+  first_name: string;
+
+  @ApiProperty({ example: 'Green', description: 'Customer last name' })
+  @Column({
+    type: DataType.STRING,
+  })
+  last_name: string;
+
+  @ApiProperty({
+    example: '+998997778800',
+    description: 'Customer phone number',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  phone: string;
+
+  @ApiProperty({ example: 'john@gmail.com', description: 'Customer email' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  email: string;
+
+  @ApiProperty({ example: 'Pa$$w0rd', description: 'Customer password' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  full_name: string;
+  password: string;
 
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
+  @ApiProperty({ example: '2002-01-01', description: 'Customer birth date' })
   @Column({
     type: DataType.DATE,
   })
-  birth_day: Date;
+  birth_date: Date;
 
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  @Column({
-    type: DataType.DECIMAL,
-  })
-  salary: number;
-
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
+  @ApiProperty({ example: 0, description: 'Customer gender' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
+  gender: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  @ApiProperty({ example: 1, description: 'Language id' })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  lang_id: number;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  hashed_refresh_token: string;
 }

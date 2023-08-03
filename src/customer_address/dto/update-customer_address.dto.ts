@@ -1,6 +1,13 @@
-export class UpdateBuilderDto {
-  full_name?: string;
-  birth_day?: Date;
-  salary?: number;
-  companyId?: number;
+export class UpdateCustomer_addressDto {
+  customer_id?: number;
+  name?: string;
+  country_id?: number;
+  region_id?: number;
+  district_id?: number;
+  street?: string;
+  house?: string;
+  flat?: number;
+  location?: string;
+  post_index?: string;
+  info?: string;
 }

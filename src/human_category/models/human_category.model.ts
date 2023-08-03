@@ -6,18 +6,17 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface Human_categoryAttr {
+  name: string;
+  start_age: number;
+  finish_age: number;
+  gender: number;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'human_category' })
+export class Human_category extends Model<Human_category, Human_categoryAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +25,39 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
+  @ApiProperty({
+    example: 'Up to 15',
+    description: 'Human category name',
+  })
   @Column({
     type: DataType.STRING,
-    allowNull: false,
   })
-  full_name: string;
+  name: string;
 
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
-  @Column({
-    type: DataType.DATE,
+  @ApiProperty({
+    example: 10,
+    description: 'Human category start age',
   })
-  birth_day: Date;
-
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  @Column({
-    type: DataType.DECIMAL,
-  })
-  salary: number;
-
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   })
-  companyId: number;
+  start_age: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  @ApiProperty({
+    example: 100,
+    description: 'Human category finish age',
+  })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  finish_age: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Human category gender (0 => male, 1 => female)',
+  })
+  @Column({
+    type: DataType.INTEGER,
+  })
+  gender: number;
 }

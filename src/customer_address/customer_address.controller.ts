@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './builder.service';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { Customer_addressService } from './customer_address.service';
+import { CreateCustomer_addressDto } from './dto/create-customer_address.dto';
+import { UpdateCustomer_addressDto } from './dto/update-customer_address.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Customer_address')
+@Controller('customer_address')
+export class Customer_addressController {
+  constructor(private readonly customer_addressService: Customer_addressService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Customer_address  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createCustomer_address(@Body() createCustomer_addressDto: CreateCustomer_addressDto) {
+    const customer_address = this.customer_addressService.createCustomer_address(createCustomer_addressDto);
+    return customer_address;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Customer_address'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllCustomer_address() {
+    return this.customer_addressService.getAllCustomer_address();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Customer_address'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getCustomer_addressById(@Param('id') id: string) {
+    return this.customer_addressService.getCustomer_addressById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Customer_address'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteCustomer_addressById(@Param('id') id: string) {
+    return this.customer_addressService.deleteCustomer_addressById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Customer_address'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateCustomer_address(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateCustomer_addressDto: UpdateCustomer_addressDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.customer_addressService.updateCustomer_address(+id, updateCustomer_addressDto);
   }
 }

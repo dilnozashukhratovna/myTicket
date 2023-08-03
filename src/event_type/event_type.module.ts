@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BuilderController } from './builder.controller';
-import { BuilderService } from './builder.service';
+import { Event_typeController } from './event_type.controller';
+import { Event_typeService } from './event_type.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Builder } from './models/builder.model';
+import { Event_type } from './models/event_type.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Builder])],
-  controllers: [BuilderController],
-  providers: [BuilderService],
+  imports: [SequelizeModule.forFeature([Event_type])],
+  controllers: [Event_typeController],
+  providers: [Event_typeService],
 })
-export class BuilderModule {}
+export class Event_typeModule {}

@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './booking.service';
-import { CreateBuilderDto } from './dto/create-booking.dto';
-import { UpdateBuilderDto } from './dto/update-booking.dto';
+import { BookingService } from './booking.service';
+import { CreateBookingDto } from './dto/create-booking.dto';
+import { UpdateBookingDto } from './dto/update-booking.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Booking')
+@Controller('booking')
+export class BookingController {
+  constructor(private readonly bookingService: BookingService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Booking  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createBooking(@Body() createBookingDto: CreateBookingDto) {
+    const booking = this.bookingService.createBooking(createBookingDto);
+    return booking;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Booking'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllBooking() {
+    return this.bookingService.getAllBooking();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Booking'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getBookingById(@Param('id') id: string) {
+    return this.bookingService.getBookingById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Booking'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteBookingById(@Param('id') id: string) {
+    return this.bookingService.deleteBookingById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Booking'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateBooking(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateBookingDto: UpdateBookingDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.bookingService.updateBooking(+id, updateBookingDto);
   }
 }

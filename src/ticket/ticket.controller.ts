@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './ticket.service';
-import { CreateBuilderDto } from './dto/create-ticket.dto';
-import { UpdateBuilderDto } from './dto/update-ticket.dto';
+import { TicketService } from './ticket.service';
+import { CreateTicketDto } from './dto/create-ticket.dto';
+import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Ticket')
+@Controller('ticket')
+export class TicketController {
+  constructor(private readonly ticketService: TicketService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Ticket  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createTicket(@Body() createTicketDto: CreateTicketDto) {
+    const ticket = this.ticketService.createTicket(createTicketDto);
+    return ticket;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Ticket'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllTicket() {
+    return this.ticketService.getAllTicket();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Ticket'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getTicketById(@Param('id') id: string) {
+    return this.ticketService.getTicketById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Ticket'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteTicketById(@Param('id') id: string) {
+    return this.ticketService.deleteTicketById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Ticket'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateTicket(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateTicketDto: UpdateTicketDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.ticketService.updateTicket(+id, updateTicketDto);
   }
 }

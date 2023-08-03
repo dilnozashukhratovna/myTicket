@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './builder.service';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { SeatService } from './seat.service';
+import { CreateSeatDto } from './dto/create-seat.dto';
+import { UpdateSeatDto } from './dto/update-seat.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Seat')
+@Controller('seat')
+export class SeatController {
+  constructor(private readonly seatService: SeatService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Seat  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createSeat(@Body() createSeatDto: CreateSeatDto) {
+    const seat = this.seatService.createSeat(createSeatDto);
+    return seat;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Seat'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllSeat() {
+    return this.seatService.getAllSeat();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Seat'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getSeatById(@Param('id') id: string) {
+    return this.seatService.getSeatById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Seat'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteSeatById(@Param('id') id: string) {
+    return this.seatService.deleteSeatById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Seat'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateSeat(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateSeatDto: UpdateSeatDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.seatService.updateSeat(+id, updateSeatDto);
   }
 }

@@ -7,47 +7,48 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './customer.service';
-import { CreateBuilderDto } from './dto/create-customer.dto';
-import { UpdateBuilderDto } from './dto/update-customer.dto';
+
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CartService } from './cart.service';
+import { CreateCartDto } from './dto/create-cart.dto';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Cart')
+@Controller('cart')
+export class CartController {
+  constructor(private readonly cartService: CartService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Cart  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createCart(@Body() createCartDto: CreateCartDto) {
+    const cart = this.cartService.createCart(createCartDto);
+    return cart;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Cart'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllCart() {
+    return this.cartService.getAllCart();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Cart'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getCartById(@Param('id') id: string) {
+    return this.cartService.getCartById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Cart'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteCartById(@Param('id') id: string) {
+    return this.cartService.deleteCartById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Cart'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateCart(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateCartDto: UpdateCartDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.cartService.updateCart(+id, updateCartDto);
   }
 }

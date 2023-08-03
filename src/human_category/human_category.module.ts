@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BuilderController } from './builder.controller';
-import { BuilderService } from './builder.service';
+import { Human_categoryController } from './human_category.controller';
+import { Human_categoryService } from './human_category.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Builder } from './models/builder.model';
+import { Human_category } from './models/human_category.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Builder])],
-  controllers: [BuilderController],
-  providers: [BuilderService],
+  imports: [SequelizeModule.forFeature([Human_category])],
+  controllers: [Human_categoryController],
+  providers: [Human_categoryService],
 })
-export class BuilderModule {}
+export class Human_categoryModule {}

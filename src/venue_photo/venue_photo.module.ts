@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BuilderController } from './venue_photo.controller';
-import { BuilderService } from './venue_photo.service';
+import { Venue_photoController } from './venue_photo.controller';
+import { Venue_photoService } from './venue_photo.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Builder } from './models/venue_photo.model';
+import { Venue_photo } from './models/venue_photo.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Builder])],
-  controllers: [BuilderController],
-  providers: [BuilderService],
+  imports: [SequelizeModule.forFeature([Venue_photo])],
+  controllers: [Venue_photoController],
+  providers: [Venue_photoService],
 })
-export class BuilderModule {}
+export class Venue_photoModule {}

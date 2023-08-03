@@ -6,18 +6,15 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Company } from 'src/company/models/company.model';
 import { ApiProperty } from '@nestjs/swagger';
 
-interface BuilderAttr {
-  full_name: string;
-  birth_day: Date;
-  salary: number;
-  companyId: number;
+interface Event_typeAttr {
+  name: string;
+  parent_event_type_id: number;
 }
 
-@Table({ tableName: 'builder' })
-export class Builder extends Model<Builder, BuilderAttr> {
+@Table({ tableName: 'event_type' })
+export class Event_type extends Model<Event_type, Event_typeAttr> {
   @ApiProperty({ example: 1, description: 'Unikal Id' })
   @Column({
     type: DataType.INTEGER,
@@ -26,34 +23,20 @@ export class Builder extends Model<Builder, BuilderAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: "John Green", description: 'Builder full name' })
+  @ApiProperty({ example: "Event", description: 'Event type name.' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  full_name: string;
+  name: string;
 
-  @ApiProperty({ example: "2001-01-01", description: 'Builder birth date' })
-  @Column({
-    type: DataType.DATE,
-  })
-  birth_day: Date;
-
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  @Column({
-    type: DataType.DECIMAL,
-  })
-  salary: number;
-
-  @ForeignKey(() => Company)
-  @ApiProperty({ example: 1, description: 'Builder company id' })
+  @ApiProperty({ example: 1, description: 'Parent event type id.' })
   @Column({
     type: DataType.INTEGER,
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
+    allowNull: false,
   })
-  companyId: number;
+  parent_event_type_id: number;
 
-  @BelongsTo(() => Company)
-  company: Company;
+  
+  
 }

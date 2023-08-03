@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './venue_photo.service';
-import { CreateBuilderDto } from './dto/create-venue_photo.dto';
-import { UpdateBuilderDto } from './dto/update-venue_photo.dto';
+import { Venue_photoService } from './venue_photo.service';
+import { CreateVenue_photoDto } from './dto/create-venue_photo.dto';
+import { UpdateVenue_photoDto } from './dto/update-venue_photo.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Venue_photo')
+@Controller('venue_photo')
+export class Venue_photoController {
+  constructor(private readonly venue_photoService: Venue_photoService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Venue_photo  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createVenue_photo(@Body() createVenue_photoDto: CreateVenue_photoDto) {
+    const venue_photo = this.venue_photoService.createVenue_photo(createVenue_photoDto);
+    return venue_photo;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Venue_photo'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllVenue_photo() {
+    return this.venue_photoService.getAllVenue_photo();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Venue_photo'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getVenue_photoById(@Param('id') id: string) {
+    return this.venue_photoService.getVenue_photoById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Venue_photo'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteVenue_photoById(@Param('id') id: string) {
+    return this.venue_photoService.deleteVenue_photoById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Venue_photo'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateVenue_photo(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateVenue_photoDto: UpdateVenue_photoDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.venue_photoService.updateVenue_photo(+id, updateVenue_photoDto);
   }
 }

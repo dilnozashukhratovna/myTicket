@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { BuilderController } from './builder.controller';
-import { BuilderService } from './builder.service';
+import { SeatController } from './seat.controller';
+import { SeatService } from './seat.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Builder } from './models/builder.model';
+import { Seat } from './models/seat.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Builder])],
-  controllers: [BuilderController],
-  providers: [BuilderService],
+  imports: [SequelizeModule.forFeature([Seat])],
+  controllers: [SeatController],
+  providers: [SeatService],
 })
-export class BuilderModule {}
+export class SeatModule {}

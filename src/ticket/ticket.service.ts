@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/ticket.model';
+import { Ticket } from './models/ticket.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-ticket.dto';
-import { UpdateBuilderDto } from './dto/update-ticket.dto';
+import { CreateTicketDto } from './dto/create-ticket.dto';
+import { UpdateTicketDto } from './dto/update-ticket.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class TicketService {
+  constructor(@InjectModel(Ticket) private ticketRepo: typeof Ticket) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createTicket(createTicketDto: CreateTicketDto): Promise<Ticket> {
+    const ticket = await this.ticketRepo.create(createTicketDto);
+    return ticket;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllTicket(): Promise<Ticket[]> {
+    const tickets = await this.ticketRepo.findAll({ include: { all: true } });
+    return tickets;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getTicketById(id: number): Promise<Ticket> {
+    const ticket = await this.ticketRepo.findByPk(id);
+    return ticket;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteTicketById(id: number) {
+    const ticket = await this.ticketRepo.destroy({ where: { id } });
+    return ticket;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateTicket(id: number, updateTicketDto: UpdateTicketDto) {
+    const ticket = await this.ticketRepo.update(updateTicketDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return ticket[1][0].dataValues;
   }
 }

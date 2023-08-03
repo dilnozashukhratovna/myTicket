@@ -1,12 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBuilderDto {
-  @ApiProperty({ example: 'John Green', description: 'Builder full name' })
-  full_name: string;
-  @ApiProperty({ example: '2001-01-01', description: 'Builder birth date' })
-  birth_day: Date;
-  @ApiProperty({ example: 99.999, description: 'Builder salary' })
-  salary: number;
-  @ApiProperty({ example: 1, description: 'Builder company id' })
-  companyId: number;
+export class CreateSeatDto {
+  @ApiProperty({ example: 1, description: 'Sector' })
+  sector: number;
+  @ApiProperty({ example: 1, description: 'Row number' })
+  row_number: number;
+  @ApiProperty({ example: 1, description: 'Number' })
+  number: number;
+  @ApiProperty({ example: 1, description: 'Venue id' })
+  venue_id: number;
+  @ApiProperty({ example: 1, description: 'Seat type id' })
+  seat_type_id: number;
+  @ApiProperty({ example: "Location", description: 'Location in schema' })
+  location_in_schema: string;
+ 
 }

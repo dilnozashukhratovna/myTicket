@@ -7,47 +7,47 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { BuilderService } from './builder.service';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { Human_categoryService } from './human_category.service';
+import { CreateHuman_categoryDto } from './dto/create-human_category.dto';
+import { UpdateHuman_categoryDto } from './dto/update-human_category.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Builder')
-@Controller('builder')
-export class BuilderController {
-  constructor(private readonly builderService: BuilderService) {}
+@ApiTags('Human_category')
+@Controller('human_category')
+export class Human_categoryController {
+  constructor(private readonly human_categoryService: Human_categoryService) {}
 
-  @ApiOperation({ summary: 'Builder  yaratish' })
+  @ApiOperation({ summary: 'Human_category  yaratish' })
   @Post('create')
-  async createBuilder(@Body() createBuilderDto: CreateBuilderDto) {
-    const builder = this.builderService.createBuilder(createBuilderDto);
-    return builder;
+  async createHuman_category(@Body() createHuman_categoryDto: CreateHuman_categoryDto) {
+    const human_category = this.human_categoryService.createHuman_category(createHuman_categoryDto);
+    return human_category;
   }
 
-  @ApiOperation({ summary: "Builder'lani  ko'rish" })
+  @ApiOperation({ summary: "Human_category'lani  ko'rish" })
   @Get('all')
-  async getAllBuilder() {
-    return this.builderService.getAllBuilder();
+  async getAllHuman_category() {
+    return this.human_categoryService.getAllHuman_category();
   }
 
-  @ApiOperation({ summary: "Builder'ni id bo'yicha ko'rish" })
+  @ApiOperation({ summary: "Human_category'ni id bo'yicha ko'rish" })
   @Get(':id')
-  async getBuilderById(@Param('id') id: string) {
-    return this.builderService.getBuilderById(+id);
+  async getHuman_categoryById(@Param('id') id: string) {
+    return this.human_categoryService.getHuman_categoryById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni o'chirish" })
+  @ApiOperation({ summary: "Human_category'ni o'chirish" })
   @Delete(':id')
-  async deleteBuilderById(@Param('id') id: string) {
-    return this.builderService.deleteBuilderById(+id);
+  async deleteHuman_categoryById(@Param('id') id: string) {
+    return this.human_categoryService.deleteHuman_categoryById(+id);
   }
 
-  @ApiOperation({ summary: "Builder'ni yangilash" })
+  @ApiOperation({ summary: "Human_category'ni yangilash" })
   @Put(':id')
-  async updateBuilder(
+  async updateHuman_category(
     @Param('id') id: string,
-    @Body() updateBuilderDto: UpdateBuilderDto,
+    @Body() updateHuman_categoryDto: UpdateHuman_categoryDto,
   ) {
-    return this.builderService.updateBuilder(+id, updateBuilderDto);
+    return this.human_categoryService.updateHuman_category(+id, updateHuman_categoryDto);
   }
 }

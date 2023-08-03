@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/builder.model';
+import { Human_category } from './models/human_category.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { CreateHuman_categoryDto } from './dto/create-human_category.dto';
+import { UpdateHuman_categoryDto } from './dto/update-human_category.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class Human_categoryService {
+  constructor(@InjectModel(Human_category) private human_categoryRepo: typeof Human_category) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createHuman_category(createHuman_categoryDto: CreateHuman_categoryDto): Promise<Human_category> {
+    const human_category = await this.human_categoryRepo.create(createHuman_categoryDto);
+    return human_category;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllHuman_category(): Promise<Human_category[]> {
+    const human_categorys = await this.human_categoryRepo.findAll({ include: { all: true } });
+    return human_categorys;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getHuman_categoryById(id: number): Promise<Human_category> {
+    const human_category = await this.human_categoryRepo.findByPk(id);
+    return human_category;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteHuman_categoryById(id: number) {
+    const human_category = await this.human_categoryRepo.destroy({ where: { id } });
+    return human_category;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateHuman_category(id: number, updateHuman_categoryDto: UpdateHuman_categoryDto) {
+    const human_category = await this.human_categoryRepo.update(updateHuman_categoryDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return human_category[1][0].dataValues;
   }
 }

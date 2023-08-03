@@ -1,39 +1,39 @@
 import { Injectable } from '@nestjs/common';
-import { Builder } from './models/builder.model';
+import { Customer_address } from './models/customer_address.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateBuilderDto } from './dto/create-builder.dto';
-import { UpdateBuilderDto } from './dto/update-builder.dto';
+import { CreateCustomer_addressDto } from './dto/create-customer_address.dto';
+import { UpdateCustomer_addressDto } from './dto/update-customer_address.dto';
 
 @Injectable()
-export class BuilderService {
-  constructor(@InjectModel(Builder) private builderRepo: typeof Builder) {}
+export class Customer_addressService {
+  constructor(@InjectModel(Customer_address) private customer_addressRepo: typeof Customer_address) {}
 
-  async createBuilder(createBuilderDto: CreateBuilderDto): Promise<Builder> {
-    const builder = await this.builderRepo.create(createBuilderDto);
-    return builder;
+  async createCustomer_address(createCustomer_addressDto: CreateCustomer_addressDto): Promise<Customer_address> {
+    const customer_address = await this.customer_addressRepo.create(createCustomer_addressDto);
+    return customer_address;
   }
 
-  async getAllBuilder(): Promise<Builder[]> {
-    const builders = await this.builderRepo.findAll({ include: { all: true } });
-    return builders;
+  async getAllCustomer_address(): Promise<Customer_address[]> {
+    const customer_addresss = await this.customer_addressRepo.findAll({ include: { all: true } });
+    return customer_addresss;
   }
 
-  async getBuilderById(id: number): Promise<Builder> {
-    const builder = await this.builderRepo.findByPk(id);
-    return builder;
+  async getCustomer_addressById(id: number): Promise<Customer_address> {
+    const customer_address = await this.customer_addressRepo.findByPk(id);
+    return customer_address;
   }
 
-  async deleteBuilderById(id: number) {
-    const builder = await this.builderRepo.destroy({ where: { id } });
-    return builder;
+  async deleteCustomer_addressById(id: number) {
+    const customer_address = await this.customer_addressRepo.destroy({ where: { id } });
+    return customer_address;
   }
 
-  async updateBuilder(id: number, updateBuilderDto: UpdateBuilderDto) {
-    const builder = await this.builderRepo.update(updateBuilderDto, {
+  async updateCustomer_address(id: number, updateCustomer_addressDto: UpdateCustomer_addressDto) {
+    const customer_address = await this.customer_addressRepo.update(updateCustomer_addressDto, {
       where: { id },
       returning: true,
     });
 
-    return builder[1][0].dataValues;
+    return customer_address[1][0].dataValues;
   }
 }
